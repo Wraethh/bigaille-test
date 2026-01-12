@@ -36,6 +36,11 @@ const uspContent = {
       "Grâce à l'ajout d'outil de traçabilité sur les flyers glissés à l'intérieur des colis, nous aurons la possibilité de vous donner des résultats sur la qualité de la campagne.",
   },
 };
+
+function scrollToForm() {
+  const element = document.getElementById("inscription");
+  element?.scrollIntoView({ behavior: "smooth" });
+}
 </script>
 
 <template>
@@ -60,12 +65,14 @@ const uspContent = {
             ultra-engageante.
           </p>
         </div>
-        <a href="#inscription">
-          <Button variant="secondary" class="w-fit shadow-2xl font-bold">
-            Participer au test gratuitement
-            <ArrowBigRight />
-          </Button>
-        </a>
+        <Button
+          variant="secondary"
+          class="w-fit shadow-2xl font-bold"
+          @click="scrollToForm"
+        >
+          Participer au test gratuitement
+          <ArrowBigRight />
+        </Button>
       </div>
       <div class="img-container max-w-125 hidden lg:block">
         <img src="../assets/pic2.png" alt="" />

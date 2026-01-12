@@ -27,6 +27,11 @@ const stepsContent = {
       "Tu seras le premier informé de la suite de Bigaille. On espère sincèrement que ça sera un succès grâce à toi !",
   },
 };
+
+function scrollToForm() {
+  const element = document.getElementById("inscription");
+  element?.scrollIntoView({ behavior: "smooth" });
+}
 </script>
 
 <template>
@@ -40,12 +45,14 @@ const stepsContent = {
           Tu es adepte de la revente de vêtements ou tout autre objet en ligne ? Utilise
           Bigaille et transforme ton temps en argent !
         </p>
-        <a href="#inscription">
-          <Button variant="secondary" class="w-fit shadow-2xl font-bold">
-            Participer au test gratuitement
-            <ArrowBigRight />
-          </Button>
-        </a>
+        <Button
+          variant="secondary"
+          class="w-fit shadow-2xl font-bold"
+          @click="scrollToForm"
+        >
+          Participer au test gratuitement
+          <ArrowBigRight />
+        </Button>
       </div>
       <div class="img-container max-w-100 hidden lg:block">
         <img
