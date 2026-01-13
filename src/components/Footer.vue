@@ -26,7 +26,7 @@ function showToast() {
   >
     <section class="infos">
       <h2>Informations utiles</h2>
-      <ul>
+      <ul class="flex flex-col">
         <li v-for="link in infosLinks">
           <RouterLink :to="link.to">{{ link.text }}</RouterLink>
         </li>
@@ -90,5 +90,11 @@ h2 {
 }
 li {
   font-size: 0.75rem;
+}
+
+@media (pointer: coarse) {
+  .infos ul {
+    gap: 0.5rem;
+  }
 }
 </style>

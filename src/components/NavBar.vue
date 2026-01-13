@@ -45,7 +45,13 @@ function handleClickOutsideNav(e: Event) {
         </li>
       </ul>
 
-      <Button variant="ghost" size="icon-lg" class="sm:hidden" @click="openMobileNav">
+      <Button
+        variant="ghost"
+        size="icon-lg"
+        class="sm:hidden"
+        @click="openMobileNav"
+        aria-label="Open navigation menu"
+      >
         <Package v-if="!mobileNavOpen" class="icon" />
         <PackageOpen v-else class="icon" />
       </Button>
@@ -66,7 +72,12 @@ function handleClickOutsideNav(e: Event) {
         >
           <div class="flex flex-col justify-center items-center size-full">
             <div class="mobile-menu-header absolute top-0 right-0">
-              <Button variant="ghost" size="icon-lg" @click="closeMobileNav">
+              <Button
+                variant="ghost"
+                size="icon-lg"
+                @click="closeMobileNav"
+                aria-label="Close navigation menu"
+              >
                 <X />
               </Button>
             </div>
