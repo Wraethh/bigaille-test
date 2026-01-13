@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://bigaille.netlify.app/sitemap.xml
