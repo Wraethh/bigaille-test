@@ -31,8 +31,11 @@ function handleClickOutsideNav(e: Event) {
   <header class="flex-none py-4 px-4 pr-6 bg-secondary">
     <nav class="flex justify-between" aria-label="Navigation principale">
       <div class="logo-container grid place-items-center max-w-36">
-        <RouterLink to="/">
-          <img src="../assets/logo-dark.png" alt="" />
+        <RouterLink to="/" aria-label="Bigaille">
+          <img
+            src="../assets/logo-dark.png"
+            alt="Logo 'bigaille' écrit en minuscule bleu avec un petit personne cartoon rond et jaune dans la boucle du 'a'."
+          />
         </RouterLink>
       </div>
 

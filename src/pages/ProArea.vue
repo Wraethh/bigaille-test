@@ -75,7 +75,10 @@ function scrollToForm() {
         </Button>
       </div>
       <div class="img-container max-w-125 hidden lg:block">
-        <img src="../assets/pic2.png" alt="" />
+        <img
+          src="../assets/pic2.png"
+          alt="Carton fermé avec du scotch entouré de trois petit personnage rond et jaune dans un style cartoon"
+        />
       </div>
     </section>
 

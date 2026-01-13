@@ -57,7 +57,7 @@ function scrollToForm() {
       <div class="img-container max-w-100 hidden lg:block">
         <img
           src="../assets/pic1.webp"
-          alt="Person placing a black-and-white card and tissue-wrapped item into an open cardboard box on a wooden table, with gold scissors nearby."
+          alt="Personne plaçant une carte en noir et blanc sur un objet emballé dans du papier blanc, le tout dans un carton ouvert sur une table."
         />
       </div>
     </section>
