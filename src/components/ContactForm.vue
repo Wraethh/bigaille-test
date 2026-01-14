@@ -39,7 +39,7 @@ function showSuccessToast() {
 }
 
 function showErrorToast() {
-  toast.success("Il semble y avoir un problème", {
+  toast.error("Il semble y avoir un problème", {
     description: "Veuillez réessayer ultérieurement",
     duration: 6000,
     action: {
@@ -49,7 +49,6 @@ function showErrorToast() {
 }
 
 const formSchema = z.object({
-  botField: z.string(),
   fullName: z
     .string()
     .trim()
@@ -66,7 +65,6 @@ const formSchema = z.object({
 
 const form = useForm({
   defaultValues: {
-    botField: "",
     fullName: "",
     email: "",
     business: "",
@@ -129,24 +127,6 @@ function isInvalid(field: any) {
         <FieldDescription>{{ headerDesc }}</FieldDescription>
         <FieldGroup>
           <input type="hidden" name="form-name" value="contact" />
-          <form.Field name="botField">
-            <template v-slot="{ field }">
-              <div class="hidden">
-                <FieldLabel :for="field.name">
-                  Ne pas remplir si vous êtes humain:
-                </FieldLabel>
-                <Input
-                  :id="field.name"
-                  :name="field.name"
-                  :model-value="field.state.value"
-                  type="text"
-                  autocomplete="off"
-                  tabindex="-1"
-                  @input="field.handleChange($event.target?.value)"
-                />
-              </div>
-            </template>
-          </form.Field>
 
           <form.Field name="fullName">
             <template v-slot="{ field }">
