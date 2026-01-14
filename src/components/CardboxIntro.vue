@@ -17,7 +17,7 @@ onMounted(() => {
 <template>
   <Transition name="cardbox">
     <div class="cardbox fixed w-full h-full z-20" v-if="!isBoxOpened">
-      <button class="top w-full h-1/2" @click="openBox">
+      <button class="top w-full h-1/2" @click="openBox" aria-label="Cliquez pour ouvrir">
         <span>Bigaille</span>
       </button>
       <div class="bottom w-full h-1/2 border-t-2 border-t-orange-950"></div>

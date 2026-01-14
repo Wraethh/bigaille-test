@@ -52,7 +52,7 @@ function showToast() {
     </section>
 
     <p class="credits text-xs text-slate-400 text-center mt-8">
-      © 2025 Tous droits réservés - Site réalisé avec 🧠 par
+      © 2026 Tous droits réservés - Site réalisé avec 🧠 par
       <a href="https://github.com/Wraethh" class="underline">Guillaume Lamourec</a>
     </p>
   </footer>

@@ -28,7 +28,7 @@ const messageDefault = "Je veux participer !";
 const messageMax = 300;
 const messageLength = ref<number>(messageDefault.length);
 
-function showToast() {
+function showSuccessToast() {
   toast.success("Merci pour votre message !", {
     description: "Nous allons bientôt vous recontacter",
     duration: 6000,
@@ -38,7 +38,18 @@ function showToast() {
   });
 }
 
+function showErrorToast() {
+  toast.success("Il semble y avoir un problème", {
+    description: "Veuillez réessayer ultérieurement",
+    duration: 6000,
+    action: {
+      label: "Mince...",
+    },
+  });
+}
+
 const formSchema = z.object({
+  botField: z.string(),
   fullName: z
     .string()
     .trim()
@@ -55,6 +66,7 @@ const formSchema = z.object({
 
 const form = useForm({
   defaultValues: {
+    botField: "",
     fullName: "",
     email: "",
     business: "",
@@ -65,15 +77,34 @@ const form = useForm({
     onChange: formSchema,
   },
   onSubmit: async ({ value }) => {
-    // Do something with form data
-    value.fullName = value.fullName
-      .split(" ")
-      .map((s) => s[0]?.toUpperCase() + s.slice(1).toLowerCase())
-      .join(" ");
+    try {
+      value.fullName = value.fullName
+        .split(" ")
+        .map((s) => s[0]?.toUpperCase() + s.slice(1).toLowerCase())
+        .join(" ");
 
-    console.log(value);
-    form.reset();
-    showToast();
+      const formData = new FormData();
+      formData.append("form-name", "contact");
+      for (const [key, data] of Object.entries(value)) {
+        formData.append(key, data.toString());
+      }
+
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData as any).toString(),
+      });
+
+      if (response.ok) {
+        showSuccessToast();
+        form.reset();
+      } else {
+        throw new Error("Erreur lors de l'envoi");
+      }
+    } catch (error) {
+      console.error(error);
+      showErrorToast();
+    }
   },
 });
 
@@ -83,15 +114,40 @@ function isInvalid(field: any) {
 </script>
 
 <template>
-  <!-- <div class="form-container p-8 sm:py-12"> -->
   <div class="form-container max-w-2xl m-auto">
-    <form @submit.prevent.stop="form.handleSubmit">
+    <form
+      @submit.prevent.stop="form.handleSubmit"
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="botField"
+    >
       <FieldSet>
         <FieldLegend>
           {{ headerLegend }}
         </FieldLegend>
         <FieldDescription>{{ headerDesc }}</FieldDescription>
         <FieldGroup>
+          <input type="hidden" name="form-name" value="contact" />
+          <form.Field name="botField">
+            <template v-slot="{ field }">
+              <div class="hidden">
+                <FieldLabel :for="field.name">
+                  Ne pas remplir si vous êtes humain:
+                </FieldLabel>
+                <Input
+                  :id="field.name"
+                  :name="field.name"
+                  :model-value="field.state.value"
+                  type="text"
+                  autocomplete="off"
+                  tabindex="-1"
+                  @input="field.handleChange($event.target?.value)"
+                />
+              </div>
+            </template>
+          </form.Field>
+
           <form.Field name="fullName">
             <template v-slot="{ field }">
               <Field>
