@@ -49,6 +49,7 @@ function showErrorToast() {
 }
 
 const formSchema = z.object({
+  botField: z.string(),
   fullName: z
     .string()
     .trim()
@@ -65,6 +66,7 @@ const formSchema = z.object({
 
 const form = useForm({
   defaultValues: {
+    botField: "",
     fullName: "",
     email: "",
     business: "",
@@ -113,12 +115,7 @@ function isInvalid(field: any) {
 
 <template>
   <div class="form-container max-w-2xl m-auto">
-    <form
-      @submit.prevent.stop="form.handleSubmit"
-      name="contact"
-      method="POST"
-      netlify-honeypot="botField"
-    >
+    <form @submit.prevent.stop="form.handleSubmit" name="contact" method="POST">
       <FieldSet>
         <FieldLegend>
           {{ headerLegend }}
@@ -126,6 +123,23 @@ function isInvalid(field: any) {
         <FieldDescription>{{ headerDesc }}</FieldDescription>
         <FieldGroup>
           <input type="hidden" name="form-name" value="contact" />
+
+          <form.Field name="botField">
+            <template v-slot="{ field }">
+              <div class="hidden">
+                <FieldLabel> Ne pas remplir si vous êtes humain: </FieldLabel>
+                <Input
+                  :id="field.name"
+                  :name="field.name"
+                  :value="field.state.value"
+                  type="text"
+                  autocomplete="off"
+                  tabindex="-1"
+                  @input="field.handleChange($event.target.value)"
+                />
+              </div>
+            </template>
+          </form.Field>
 
           <form.Field name="fullName">
             <template v-slot="{ field }">

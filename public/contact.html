@@ -4,7 +4,8 @@
   <title>Contact Form</title>
 </head>
 <body style="display: none;">
-  <form name="contact" netlify>
+  <form name="contact" netlify netlify-honeypot="botField">
+    <input type="text" name="botField" />
     <input type="text" name="fullName" />
     <input type="email" name="email" />
     <input type="text" name="business" />
