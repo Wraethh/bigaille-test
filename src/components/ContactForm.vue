@@ -113,16 +113,6 @@ function isInvalid(field: any) {
 
 <template>
   <div class="form-container max-w-2xl m-auto">
-    <!-- Formulaire caché pour la détection par Netlify -->
-    <form name="contact" netlify hidden>
-      <input type="text" name="fullName" />
-      <input type="email" name="email" />
-      <input type="text" name="business" />
-      <textarea name="message"></textarea>
-      <input type="checkbox" name="news" />
-    </form>
-    <!-- _______________________________________________ -->
-
     <form
       @submit.prevent.stop="form.handleSubmit"
       name="contact"
