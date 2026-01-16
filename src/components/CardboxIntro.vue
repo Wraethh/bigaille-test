@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ArrowsUpFromLine, Martini, Umbrella } from "lucide-vue-next";
 import { onMounted, ref, Transition } from "vue";
 
 const isBoxOpened = ref<boolean>(false);
@@ -20,7 +21,13 @@ onMounted(() => {
       <button class="top w-full h-1/2" @click="openBox" aria-label="Cliquez pour ouvrir">
         <span>Bigaille</span>
       </button>
-      <div class="bottom w-full h-1/2 border-t-2 border-t-orange-950"></div>
+      <div
+        class="bottom w-full h-1/2 border-t-2 border-t-orange-950 flex justify-end items-end gap-1 p-4"
+      >
+        <Martini />
+        <Umbrella />
+        <ArrowsUpFromLine />
+      </div>
     </div>
   </Transition>
 </template>
@@ -79,13 +86,20 @@ onMounted(() => {
   transition: transform 1s ease;
 }
 
+.cardbox .bottom > svg {
+  color: darkred;
+  border: 2px solid darkred;
+  width: 3rem;
+  height: 3rem;
+}
+
 .cardbox .top::after {
   content: "⬇";
   position: absolute;
   bottom: 0;
   left: 47%;
   color: darkred;
-  font-size: 5rem;
+  font-size: 3rem;
   font-weight: bold;
   rotate: 180deg;
   animation: float 0.7s infinite alternate;
@@ -96,6 +110,11 @@ onMounted(() => {
   }
   100% {
     bottom: 5%;
+  }
+}
+@media (min-width: 640px) {
+  .cardbox .top::after {
+    font-size: 5rem;
   }
 }
 </style>
